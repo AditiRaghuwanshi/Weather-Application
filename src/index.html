@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeatherApp</title>
+    <link href="./output.css" rel="stylesheet" />
+  </head>
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeatherApp</title>
+    <link href="./output.css" rel="stylesheet" />
+  </head>
+  <body class="m-0 p-0 box-border font-Montserrat">
+    <!-- Desktop Background - FIXED position -->
+    <div class="hidden lg:flex items-center justify-center w-screen h-screen overflow-hidden fixed inset-0 z-0">
+      <img
+        src="../allVideos/desktop2.jpg"
+        alt="WeatherApp Logo"
+        class="object-cover"
+        style="transform: rotate(-90deg) scale(1); filter: blur(3px);"
+      />
+    </div>
+
+    <!-- Mobile Background - FIXED position -->
+    <img
+      src="../allVideos/mobilevieww.jpg"
+      alt="WeatherApp Logo"
+      class="block lg:hidden w-full h-screen object-cover fixed inset-0 z-0"
+      style="filter: blur(1.2px);"
+    />
+
+    <!-- Main Content -->
+    <main class="relative z-10 min-h-screen flex items-center justify-center p-4">
+
+  <div class="w-[90%] max-w-[1600px] min-h-[600px] lg:h-[800px] backdrop-blur-md lg:bg-orange-200/15 border-blue-200/15 border border-blue-400/30 lg:border-orange-400/30 rounded-xl p-6 shadow-2xl">
+
+    <!-- CONTAINER FOR SEARCH + DATE + LOCATION -->
+    <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
+
+      <!-- SEARCH BOX -->
+      <div class="relative w-[250px]">
+        <input 
+          type="text" 
+          id="cityname" 
+          placeholder="Enter City Name"
+          class="w-full h-[30px] rounded-full text-gray-400 bg-white/80 px-4 pr-10 
+                 border border-blue-200 lg:border-orange-200 
+                 focus:border-blue-400 lg:focus:border-orange-500 
+                 focus:ring-1 lg:focus:ring-orange-300 outline-none"
+        />
+        
+        <img 
+          src="../allVideos/search.png" 
+          alt="search"
+          class="w-[20px] h-[20px] absolute right-3 top-1/2 -translate-y-1/2"
+        />
+      </div>
+
+      <!-- DATE + LOCATION STACK (Mobile) / Inline (Desktop) -->
+     <div class="flex flex-col lg:flex-row lg:items-center gap-2">
+
+  <!-- CITY + ICON + DATE (STACKED ON DESKTOP) -->
+  <div class="flex flex-col">
+
+    <!-- City + Icons -->
+    <div class="flex items-center gap-2">
+      <h1 class="text-gray-600">Indore, India</h1>
+
+      <!-- Desktop icon -->
+      <img src="../allVideos/pin.png" class="hidden lg:block w-[25px] h-[25px]" />
+
+      <!-- Mobile icon -->
+      <img src="../allVideos/gps.png" class="lg:hidden w-[20px] h-[20px]" />
+    </div>
+
+    <!-- Date BELOW city on desktop -->
+    <h1 class="text-black">Date: 22-11-25</h1>
+
+  </div>
+
+</div>
+
+   
+
+
+
+    </div>
+
+       <div class="weather-summary">
+
+        <div class="cloudy-weather">
+        <video src="../allVideos/niceclouds.mp4" autoplay muted loop class="w-[300px] h-auto rounded-sm">
+        </video>
+        <div class="weather-info">
+          <h1 class="temp-text" id="temp-text">29℃ </h1>
+          <h2 class="condition-txt" id="condition-txt">Clouds</h2>
+        </div> 
+
+</div>
+
+       </div>
+       
+
+  </div>
+
+</main>
+
+
+      </div>
+    </main>
+  </body>
+</html>
+</html>
+
+<!-- acde36f80969c6701fd26f00e4c6614b -->
