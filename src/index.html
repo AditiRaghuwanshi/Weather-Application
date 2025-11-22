@@ -6,14 +6,8 @@
     <title>WeatherApp</title>
     <link href="./output.css" rel="stylesheet" />
   </head>
- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WeatherApp</title>
-    <link href="./output.css" rel="stylesheet" />
-  </head>
+
+ 
   <body class="m-0 p-0 box-border font-Montserrat">
     <!-- Desktop Background - FIXED position -->
     <div class="hidden lg:flex items-center justify-center w-screen h-screen overflow-hidden fixed inset-0 z-0">
@@ -34,7 +28,7 @@
     />
 
     <!-- Main Content -->
-    <main class="relative z-10 min-h-screen flex items-center justify-center p-4">
+    <main class="relative z-10 min-h-screen flex items-center justify-center">
 
   <div class="w-[90%] max-w-[1600px] min-h-[600px] lg:h-[800px] backdrop-blur-md lg:bg-orange-200/15 border-blue-200/15 border border-blue-400/30 lg:border-orange-400/30 rounded-xl p-6 shadow-2xl">
 
@@ -52,6 +46,7 @@
                  focus:border-blue-400 lg:focus:border-orange-500 
                  focus:ring-1 lg:focus:ring-orange-300 outline-none"
         />
+
         
         <img 
           src="../allVideos/search.png" 
@@ -84,36 +79,109 @@
 
 </div>
 
-   
-
-
-
     </div>
 
-       <div class="weather-summary">
+      <div class="weather-summary">
+  <div id="cloudy-weather" class="lg:flex gap-4">
+   <video src="../allVideos/niceclouds.mp4" autoplay muted loop class="w-[300px] h-auto rounded-md"></video>
+   
+    <div class="flex flex-col lg:flex lg:flex-row">
 
-        <div class="cloudy-weather">
-        <video src="../allVideos/niceclouds.mp4" autoplay muted loop class="w-[300px] h-auto rounded-sm">
-        </video>
-        <div class="weather-info">
-          <h1 class="temp-text" id="temp-text">29℃ </h1>
-          <h2 class="condition-txt" id="condition-txt">Clouds</h2>
-        </div> 
+      <!-- Temperature and Condition -->
+      <div id="weather-info" class="flex  items-center justify-center text-white lg:text-gray-200">
+       <div class="flex flex-col items-center lg:items-start lg:flex-row gap-4">
+        <h1 class=" text-3xl font-bold lg:mt-[-1px]" id="temp-text">29℃ </h1>
+        <h2 class=" text-2xl lg:mt-[-1px]" id="condition-txt"> Clouds</h2>
+        </div>
+      </div>
+      
+      <!-- Wind Speed and Humidity -->
+<div class="flex items-center justify-center text-white lg:text-gray-300 ">
+  
+
+  <div class="flex items-center lg:px-4 gap-2">
+    <img src="../allVideos/humidity.png" class="w-[20px] h-[20px]" />
+    <span id="wind-speed" class="text-sm">Humidity: 22 %</span>
+  </div>
+
+
+
+  <div class="flex items-center gap-2">
+    <img src="../allVideos/wind.png" class="w-[20px] h-[20px]" />
+    <span id="wind-speed" class="text-sm">Wind Speed: 12 km/h</span>
+  </div>
 
 </div>
 
-       </div>
-       
+
+    </div>
+  </div>
+</div>
+
+
+    
+<!-- cards grid -->
+<div class="mt-24 w-full overflow-x-auto">
+  <div class="flex gap-4 snap-x snap-mandatory">
+
+    <!-- Card 1 -->
+    <div class="bg-white/60 border border-white/40 shadow-lg rounded-xl h-40 
+                flex-shrink-0 snap-center 
+                w-[100px] md:w-[400px] flex items-center justify-center text-black">
+      Card 1
+    </div>
+
+    <!-- Card 2 -->
+    <div class="bg-white/60 border border-white/40 shadow-lg rounded-xl h-40 
+                flex-shrink-0 snap-center
+                w-[100px] md:w-[400px] flex items-center justify-center text-black">
+      Card 2
+    </div>
+
+    <!-- Card 3 -->
+    <div class="bg-white/60 border border-white/40 shadow-lg rounded-xl h-40 
+                flex-shrink-0 snap-center
+                w-[100px] md:w-[400px] flex items-center justify-center text-black">
+      Card 3
+    </div>
+
+    <!-- Card 4 -->
+    <div class="bg-white/60 border border-white/40 shadow-lg rounded-xl h-40 
+                flex-shrink-0 snap-center
+                w-[100px] md:w-[400px] flex items-center justify-center text-black">
+      Card 4
+    </div>
+
+    <!-- Card 5 -->
+    <div class="bg-white/60 border border-white/40 shadow-lg rounded-xl h-40 
+                flex-shrink-0 snap-center
+                w-[100px] md:w-[400px] flex items-center justify-center text-black">
+      Card 5
+    </div>
+
+    <!-- Card 6 -->
+    <div class="bg-white/60 border border-white/40 shadow-lg rounded-xl h-40 
+                flex-shrink-0 snap-center
+                w-[100px] md:w-[400px] flex items-center justify-center text-black">
+      Card 6
+    </div>
+
+  </div>
+</div>
+
 
   </div>
 
 </main>
 
 
+
+
+
       </div>
-    </main>
+  
   </body>
 </html>
-</html>
+
 
 <!-- acde36f80969c6701fd26f00e4c6614b -->
