@@ -36,15 +36,15 @@
     <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
 
       <!-- SEARCH BOX -->
-      <div class="relative w-[250px]">
+      <div class="relative w-[250px] ml-4 lg:ml-[-1px] lg:w-[350px]">
         <input 
           type="text" 
           id="cityname" 
           placeholder="Enter City Name"
-          class="w-full h-[30px] rounded-full text-gray-400 bg-white/80 px-4 pr-10 
+          class="w-full  h-[30px] rounded-full text-gray-400 bg-white/80 px-4 pr-10 
                  border border-blue-200 lg:border-orange-200 
                  focus:border-blue-400 lg:focus:border-orange-500 
-                 focus:ring-1 lg:focus:ring-orange-300 outline-none"
+                 focus:ring-1 lg:focus:ring-orange-300 outline-none "
         />
 
         
@@ -54,6 +54,13 @@
           class="w-[20px] h-[20px] absolute right-3 top-1/2 -translate-y-1/2"
         />
       </div>
+
+
+
+    
+
+
+      
 
       <!-- DATE + LOCATION STACK (Mobile) / Inline (Desktop) -->
      <div class="flex flex-col lg:flex-row lg:items-center gap-2">
@@ -73,8 +80,16 @@
     </div>
 
     <!-- Date BELOW city on desktop -->
-    <h1 class="text-black" id="datetime">Date: 22-11-25</h1>
+     <div class="flex flex-row lg:flex-col justify-between mb-4">
+    <h1 class="text-gray-600" id="datetime"></h1>
 
+    
+      <button id="detect-location-btn"
+    class="px-1 py-1 bg-blue-600 text-white rounded-md mt-4 w-[150px] lg:mt-2  mt-[-4px]
+           hover:bg-blue-700 lg:bg-orange-300 lg:hover:bg-orange-400">
+    Detect My Location
+</button>
+</div>
   </div>
 
 </div>
@@ -93,8 +108,8 @@
       <!-- Temperature and Condition -->
       <div id="weather-info" class="flex items-center justify-center text-white lg:text-gray-200">
         <div class="flex flex-row items-center lg:items-start lg:flex-row gap-4 lg:gap-6">
-          <h1 class="text-xl lg:text-6xl font-bold lg:mt-[-1px]" id="temp-text"></h1>
-          <h2 class="text-2xl lg:text-5xl lg:mt-[-1px]" id="condition-txt"></h2>
+          <h1 class="text-2xl lg:text-6xl font-bold" id="temp-text"></h1>
+          <h2 class="text-2xl lg:text-6xl" id="condition-txt"></h2>
         </div>
       </div>
       
@@ -103,7 +118,7 @@
         
         <div class="flex items-center lg:px-4 gap-2 lg:gap-3">
           <img src="../allVideos/humidity.png" class="w-[15px] h-[15px] lg:w-[30px] lg:h-[30px]" />
-          <span id="humidity" class="text-sm lg:text-xl">Humidity: </span>
+          <span id="humidity" class="text-sm lg:text-xl py-4">Humidity: </span>
         </div>
 
         <div class="flex items-center gap-2 lg:gap-3">
@@ -116,12 +131,23 @@
     </div>
   </div>
 </div>
+<div id="history-chips"
+     class="flex flex-nowrap space-x-3 overflow-x-auto whitespace-nowrap 
+            mt-4 py-2 scrollbar-thin
+            scrollbar-thumb-white/40 scrollbar-track-transparent
+            [&::-webkit-scrollbar]:h-[2px]
+            [&::-webkit-scrollbar-track]:bg-transparent
+            [&::-webkit-scrollbar-thumb]:bg-white/40
+            [&::-webkit-scrollbar-thumb]:rounded
+            [scrollbar-width:thin]
+            [scrollbar-color:rgba(255,255,255,0.4)_transparent]">
+</div>
 
 
     
 <!-- cards grid -->
 <div id="cards"
- class="mt-24 overflow-x-auto 
+ class="lg:mt-24 mt-0 overflow-x-auto 
             [&::-webkit-scrollbar]:h-[2px]
             [&::-webkit-scrollbar-track]:bg-transparent
             [&::-webkit-scrollbar-thumb]:bg-white/40
@@ -186,4 +212,3 @@
 </html>
 
 
-<!-- acde36f80969c6701fd26f00e4c6614b -->
