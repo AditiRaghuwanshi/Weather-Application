@@ -70,7 +70,7 @@
 
     <!-- City + Icons -->
     <div class="flex items-center gap-2">
-      <h1 class="text-gray-600" id="citycalled"></h1>
+      <h1 class="text-gray-700" id="citycalled"></h1>
 
       <!-- Desktop icon -->
       <img src="allvideos/pin.png" class="hidden lg:block w-[25px] h-[25px]" />
@@ -81,7 +81,7 @@
 
     <!-- Date BELOW city on desktop -->
      <div class="flex flex-row lg:flex-col justify-between mb-4">
-    <h1 class="text-gray-600" id="datetime"></h1>
+    <h1 class="text-gray-700" id="datetime"></h1>
 
     
       <button id="detect-location-btn"
@@ -106,7 +106,8 @@
     <div class="flex flex-col lg:flex lg:flex-row lg:flex-1">
 
       <!-- Temperature and Condition -->
-      <div id="weather-info" class="flex items-center justify-center text-white lg:text-gray-200">
+       <div class=" lg:flex lg:flex-col lg:mt-4 mt-2">
+      <div id="weather-info" class="flex lg:flex-col items-center justify-center text-white lg:text-gray-200">
         <div class="flex flex-row items-center lg:items-start lg:flex-row gap-4 lg:gap-6">
           <h1 class="text-2xl lg:text-6xl font-bold" id="temp-text"></h1>
           <h2 class="text-2xl lg:text-6xl" id="condition-txt"></h2>
@@ -114,7 +115,7 @@
       </div>
       
       <!-- Wind Speed and Humidity -->
-      <div class="flex flex-col lg:flex-row items-center justify-center text-white lg:text-gray-300">
+      <div class="flex flex-col items-center justify-center text-white lg:text-gray-300">
         
         <div class="flex items-center lg:px-4 gap-2 lg:gap-3">
           <img src="/humidity.png" class="w-[15px] h-[15px] lg:w-[30px] lg:h-[30px]" />
@@ -126,6 +127,7 @@
           <span id="wind-speed" class="text-sm lg:text-xl">Wind Speed: </span>
         </div>
 
+      </div>
       </div>
 
     </div>
