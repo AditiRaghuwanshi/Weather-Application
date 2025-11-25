@@ -99,7 +99,7 @@ function updateVideo(condition) {
       videoFileName = "niceclouds.mp4";
   }
 
-  weatherVideo.src = `/allvideos/${videoFileName}`;
+  weatherVideo.src = `allvideos/${videoFileName}`;
   weatherVideo.load();
   weatherVideo.play();
 }
