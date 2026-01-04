@@ -63,11 +63,30 @@ async function getWeather(cityName) {
 
     // Load Forecast Cards
     getForecast(cityName);
+    window.history.pushState({}, '', `?city=${encodeURIComponent(cityName)}`);
 
   } catch (err) {
     console.log("Error fetching weather:", err);
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const cityFromUrl = urlParams.get('city');
+  
+  if (cityFromUrl) {
+    fetchCity.value = cityFromUrl;
+    getWeather(cityFromUrl);
+  } else {
+    let lastCity = localStorage.getItem("lastCity");
+    if (lastCity) {
+      fetchCity.value = lastCity;
+      getWeather(lastCity);
+    }
+  }
+  
+  renderHistoryChips();
+});
 
 function updateVideo(condition) {
   let weatherVideo = document.querySelector('#cloudy-weather video');
