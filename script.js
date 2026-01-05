@@ -1,17 +1,24 @@
+
 let fetchCity = document.getElementById("cityname");
+const DEFAULT_CITY = "Indore";
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  let lastCity = localStorage.getItem("lastCity");
-
-  if (lastCity) {
-    fetchCity.value = lastCity;
-    getWeather(lastCity);
+  const urlParams = new URLSearchParams(window.location.search);
+  const cityFromUrl = urlParams.get("city");
+  if (cityFromUrl && cityFromUrl.trim().length > 0) {
+    fetchCity.value = cityFromUrl;
+    getWeather(cityFromUrl);
+  } else {
+    
+    fetchCity.value = DEFAULT_CITY;
+    getWeather(DEFAULT_CITY);
   }
+
+  renderHistoryChips();
 });
 
 fetchCity.addEventListener("keyup", function (e) {
-  // Only search when user presses Enter
   if (e.key === "Enter") {
     let cityName = fetchCity.value.trim();
     if (cityName.length > 0) {
@@ -33,125 +40,113 @@ async function getWeather(cityName) {
 
     let weatherData = await response.json();
 
-    // Store last searched city
-    localStorage.setItem("lastCity", cityName);
-
-    // Save search history
+    // Save search history (using in-memory storage instead of localStorage)
     saveSearchHistory(cityName);
 
     // Update UI
-    document.getElementById("citycalled").innerText =
-      `${weatherData.name}, ${weatherData.sys.country}`;
+    document.getElementById(
+      "citycalled"
+    ).innerText = `${weatherData.name}, ${weatherData.sys.country}`;
 
-    document.getElementById("datetime").innerText =
-      `Date: ${new Date().toLocaleDateString()}`;
+    document.getElementById(
+      "datetime"
+    ).innerText = `Date: ${new Date().toLocaleDateString()}`;
 
-    document.getElementById("temp-text").innerText =
-      `${weatherData.main.temp} °C`;
+    document.getElementById(
+      "temp-text"
+    ).innerText = `${weatherData.main.temp} °C`;
 
-    document.getElementById("humidity").innerText =
-      `Humidity: ${weatherData.main.humidity}%`;
+    document.getElementById(
+      "humidity"
+    ).innerText = `Humidity: ${weatherData.main.humidity}%`;
 
-    document.getElementById("wind-speed").innerText =
-      `Wind Speed: ${weatherData.wind.speed} km/h`;
+    document.getElementById(
+      "wind-speed"
+    ).innerText = `Wind Speed: ${weatherData.wind.speed} km/h`;
 
-    document.getElementById("condition-txt").innerText =
-      `${weatherData.weather[0].main}`;
+    document.getElementById(
+      "condition-txt"
+    ).innerText = `${weatherData.weather[0].main}`;
 
     // Update background video
     updateVideo(weatherData.weather[0].main.toLowerCase());
 
     // Load Forecast Cards
     getForecast(cityName);
-    window.history.pushState({}, '', `?city=${encodeURIComponent(cityName)}`);
-
+    window.history.pushState({}, "", `?city=${encodeURIComponent(cityName)}`);
   } catch (err) {
     console.log("Error fetching weather:", err);
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const cityFromUrl = urlParams.get('city');
-  
-  if (cityFromUrl) {
-    fetchCity.value = cityFromUrl;
-    getWeather(cityFromUrl);
-  } else {
-    let lastCity = localStorage.getItem("lastCity");
-    if (lastCity) {
-      fetchCity.value = lastCity;
-      getWeather(lastCity);
-    }
-  }
-  
-  renderHistoryChips();
-});
-
 function updateVideo(condition) {
-  let weatherVideo = document.querySelector('#cloudy-weather video');
-  let videoFileName;
+  let weatherVideoContainer = document.querySelector("#cloudy-weather");
+  let videoUrl;
 
   switch (condition) {
     case "rain":
     case "drizzle":
-      videoFileName = "lightRain.mp4";
+      videoUrl = "https://res.cloudinary.com/dlaenlkon/video/upload/v1767606014/lightRain_tozd8g.mp4";
       break;
     case "thunderstorm":
-      videoFileName = "heavyRain.mp4";
+      videoUrl = "https://res.cloudinary.com/dlaenlkon/video/upload/v1767606014/heavyRain_zyqbwa.mp4";
       break;
     case "clouds":
-      videoFileName = "movingClouds.mp4";
+      videoUrl = "https://res.cloudinary.com/dlaenlkon/video/upload/v1767606015/movingClouds_vbfkwz.mp4";
       break;
     case "clear":
-      videoFileName = "cloudy.mp4";
+      videoUrl = "https://res.cloudinary.com/dlaenlkon/video/upload/v1767606013/cloudy_jl5vm4.mp4";
       break;
     case "snow":
-      videoFileName = "snowflakes.mp4";
+      videoUrl = "https://res.cloudinary.com/dlaenlkon/video/upload/v1767606044/snowflakes_oj37yc.mp4";
       break;
     case "mist":
     case "fog":
     case "haze":
-      videoFileName = "foggy.mp4";
+      videoUrl = "https://res.cloudinary.com/dlaenlkon/video/upload/v1767606014/foggy_sbpt8u.mp4";
       break;
     default:
-      videoFileName = "niceclouds.mp4";
+      videoUrl = "https://res.cloudinary.com/dlaenlkon/video/upload/v1767606015/niceclouds_wpm7sj.mp4";
   }
 
-  weatherVideo.src = `allvideos/${videoFileName}`;
-  weatherVideo.load();
-  weatherVideo.play();
+  if (weatherVideoContainer) {
+    // Replace the entire video element with proper attributes
+    weatherVideoContainer.innerHTML = `
+      <video src="${videoUrl}" 
+             autoplay 
+             muted 
+             loop 
+             class="w-[300px] lg:w-[550px] h-auto rounded-md lg:rounded-lg lg:shadow-xl">
+      </video>
+    ` + weatherVideoContainer.innerHTML.substring(weatherVideoContainer.innerHTML.indexOf('</video>') + 8);
+    
+    // Get the new video element and play it
+    let newVideo = weatherVideoContainer.querySelector('video');
+    if (newVideo) {
+      newVideo.load();
+      newVideo.play();
+    }
+  }
 }
 
+// In-memory storage for search history
+let searchHistory = [];
 
 function saveSearchHistory(cityName) {
-  let history = JSON.parse(localStorage.getItem("history") || "[]");
-
-  if (!history.includes(cityName)) {
-    history.push(cityName);
+  if (!searchHistory.includes(cityName)) {
+    searchHistory.push(cityName);
   }
-
-  localStorage.setItem("history", JSON.stringify(history));
-
-  renderHistoryChips(); // ⬅ refresh UI
+  renderHistoryChips();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  renderHistoryChips();  // ⬅ load on refresh
-});
-
-
-
 function renderHistoryChips() {
-  let history = JSON.parse(localStorage.getItem("history") || "[]");
   let container = document.getElementById("history-chips");
-
   container.innerHTML = "";
 
-  history.forEach((city) => {
+  searchHistory.forEach((city) => {
     let chip = document.createElement("button");
     chip.className =
-      "px-4 lg:py-1  bg-blue-300/20 lg:bg-orange-300/40 text-white rounded-full whitespace-nowrap flex-shrink-0 hover:bg-blue-300/30 lg:hover:bg-orange-400/30";
+      "px-4 lg:py-1 bg-blue-300/20 lg:bg-orange-300/40 text-white rounded-full whitespace-nowrap flex-shrink-0 hover:bg-blue-300/30 lg:hover:bg-orange-400/30";
     chip.innerText = city;
 
     chip.addEventListener("click", () => {
@@ -164,41 +159,37 @@ function renderHistoryChips() {
 }
 
 document.getElementById("detect-location-btn").addEventListener("click", () => {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(success, error);
-    } else {
-        alert("Geolocation not supported!");
-    }
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error);
+  } else {
+    alert("Geolocation not supported!");
+  }
 });
 
 function success(position) {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
 
-    console.log("Latitude:", lat, "Longitude:", lon);
+  fetch(
+    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      const city = data.city || data.locality || data.principalSubdivision;
 
-    // STEP 1: Get city name from coordinates
-    fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`)
-        .then(res => res.json())
-        .then(data => {
-            const city = data.city || data.locality || data.principalSubdivision;
+      if (!city) {
+        alert("Could not detect city");
+        return;
+      }
 
-            if (!city) {
-                alert("Could not detect city");
-                return;
-            }
-
-            // CALL your existing weather function
-             getWeather(city);
-        });
+      fetchCity.value = city;
+      getWeather(city);
+    });
 }
 
 function error() {
-    alert("Unable to access your location.");
+  alert("Unable to access your location.");
 }
-
-
-
 
 async function getForecast(cityName) {
   let response = await fetch(

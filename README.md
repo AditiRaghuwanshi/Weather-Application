@@ -1,4 +1,8 @@
 
+Media assets are hosted on Cloudinary CDN to comply with the 40MB submission limit and improve performance.
+
+
+
 Project Description
 
 This weather forecast application is built using HTML, Tailwind CSS, and JavaScript, with data fetched from the OpenWeatherMap API. Users can search weather details by city name or fetch weather information for their current location using the Geolocation API.
